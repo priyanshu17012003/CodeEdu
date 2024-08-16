@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function SignIn() {
+
+  const{
+    register,
+    handleSubmit,
+    formState: { errors },
+  }=useForm()
+  const onSubmit = (data) => console.log(data)
+
   return (
     <>
       <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">
@@ -24,7 +33,7 @@ function SignIn() {
         </div>
 
         <div className="card bg-base-100 shrink-0 shadow-2xl w-full max-w-sm p-4">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             <Link
               to="/"
               className="btn btn-sm absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500"
@@ -41,7 +50,9 @@ function SignIn() {
                 placeholder="email"
                 className="input input-bordered"
                 name="email"
+                {...register("email", { required: true })}
               />
+              {errors.email && <span className="text-red-500">This field is required</span>}
             </div>
             <div className="form-control mt-4">
               <label className="label">
@@ -52,7 +63,9 @@ function SignIn() {
                 placeholder="password"
                 className="input input-bordered"
                 name="password"
+                {...register("password", { required: true })}
               />
+              {errors.password && <span className="text-red-500">This field is required</span>}
             </div>
             <div className="card-actions flex justify-between mt-6">
               <button className="btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white">

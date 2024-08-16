@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function LogIn() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const onSubmit = (data) => console.log(data)
+
+
   return (
     <dialog id="my_modal_3" className="modal">
       <div className="modal-box">
@@ -13,7 +23,7 @@ function LogIn() {
         </form>
         <h3 className="font-bold text-lg">Login</h3>
         <div className="card min-w-screen w-full bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -23,7 +33,9 @@ function LogIn() {
                 placeholder="email"
                 className="input input-bordered"
                 name="email"
+                {...register("email", { required: true })}
               />
+              {errors.email && <span className="text-red-500">This field is required</span>}
             </div>
             <div className="form-control">
               <label className="label">
@@ -34,7 +46,9 @@ function LogIn() {
                 placeholder="password"
                 className="input input-bordered"
                 name="password"
+                {...register("password", { required: true })}
               />
+              {errors.password && <span className="text-red-500">This field is required</span>}
             </div>
             <div className="card-actions flex justify-between mt-3">
               <button className="btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white">
