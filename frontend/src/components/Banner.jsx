@@ -14,7 +14,11 @@ function Banner() {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500">Get Started</button>
+            <div className="relative inline-block">
+            <div className="absolute bg-violet-700 opacity-10 rounded-full w-[200px] h-[200px] mt-10 md:w-[450px] md:h-[450px]"></div>
+            <div className="absolute bg-violet-700 blur-xl rounded-sm h-12 w-28 bottom-0"></div>
+            <button className="relative btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white">Get Started</button>
+            </div>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import React from "react";
+import LogIn from "./LogIn"; 
 
 function Navbar() {
   return (
@@ -49,7 +50,8 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="btn mx-2 ">Login</a>
+          <a className="btn mx-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white" onClick={()=>document.getElementById("my_modal_3").showModal()}>Login</a>
+          <LogIn></LogIn>
         </div>
       </div>
     </>
