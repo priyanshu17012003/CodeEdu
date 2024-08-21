@@ -1,25 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
 function SignIn() {
+  const navigate = useNavigate();
+  const [_, setAuthUser] = useAuth();
 
-  const{
-    register,
-    handleSubmit,
-    formState: { errors },
-  }=useForm()
-  const onSubmit = (data) => console.log(data)
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) => {
+    const user = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const res = await axios.post("/api/user/signup", user);
+      if (res.data) {
+        setAuthUser(res.data.user);
+        localStorage.setItem("uid", JSON.stringify(res.data.user));
+        toast.success(`Welcome to CodeEdu ${res.data.user.name}`);
+
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      }
+    } catch (err) {
+      if (err.response) {
+        setTimeout(() => {
+          toast.error(err.response.data.message);
+        }, 3000);
+      }
+    }
+  };
 
   return (
-    <>
-      <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+    <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center mx-4">
           <h1 className="text-4xl sm:text-5xl font-bold text-white">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500">
               Welcome!
-            </span> 
+            </span>
             Thank you for signing up on{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500">
               CodeEdu
@@ -43,6 +70,19 @@ function SignIn() {
             <div className="form-control">
               <h2 className="text-2xl font-bold mb-4 text-violet-600">SignUp</h2>
               <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="name"
+                className="input input-bordered"
+                name="name"
+                {...register("name", { required: true })}
+              />
+              {errors.name && <span className="text-red-500">This field is required</span>}
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
@@ -54,7 +94,7 @@ function SignIn() {
               />
               {errors.email && <span className="text-red-500">This field is required</span>}
             </div>
-            <div className="form-control mt-4">
+            <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
@@ -80,9 +120,8 @@ function SignIn() {
             </div>
           </form>
         </div>
-        </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,16 +1,18 @@
 const mongoose=require('mongoose');
 const express=require('express');
 const dotenv=require('dotenv');
-const app=express();
 const cors=require('cors');
+const cookieParser = require('cookie-parser');
 const userRouter=require('./routes/user-routes');
 dotenv.config();
+const app=express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
 
-const url=process.env.url;
-const port=process.env.port;
+const url=process.env.url||"mongodb://localhost:27017/CodeEdu";
+const port=process.env.port||5000;
 
 try{
     mongoose.connect(url,{
@@ -24,7 +26,7 @@ catch(error){
     console.log(error);
 }
 
-app.use('/user',userRouter);
+app.use('/api/user',userRouter);
 
 app.listen(port,()=>{
     console.log("server is running on port "+port);
