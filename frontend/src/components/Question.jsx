@@ -63,7 +63,6 @@ function Question() {
                   {question.examples.map((example, index) => (
                     <li key={index} className="text-sm text-zinc-500 mt-2">
                       <div className="bg-zinc-100 p-2 rounded">
-                        
                         <p className="font-bold">Input:</p>
                         <p
                           className="text-black cursor-pointer select-all"
