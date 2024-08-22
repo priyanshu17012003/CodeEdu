@@ -1,29 +1,62 @@
-import React from "react";
+import React, { useRef } from "react";
 import questions from "../store/questions.json";
 import { useParams } from "react-router-dom";
+
+const CopyableBox = ({ content, label }) => {
+  const textRef = useRef();
+
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(textRef.current.innerText)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
+  return (
+    <div style={{ marginBottom: "16px" }}>
+      <div>
+        <strong>{label}</strong>
+      </div>
+      <pre
+        ref={textRef}
+        style={{
+          border: "1px solid #ccc",
+          padding: "10px",
+          backgroundColor: "#f9f9f9",
+          color: "black",
+          whiteSpace: "pre-wrap", // Ensures line breaks are respected.
+          wordWrap: "break-word", // Prevents text from overflowing.
+        }}
+        dangerouslySetInnerHTML={{
+          __html: content.replace(/\\n/g, "<br />"),
+        }}
+      ></pre>
+      <button onClick={copyToClipboard} style={{ marginTop: "8px" }}>
+        Copy
+      </button>
+    </div>
+  );
+};
 
 function Question() {
   const { id } = useParams();
   const question = questions.find((q) => q.id == id);
-  console.log(question);
 
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        alert("Input copied to clipboard!");
-      },
-      (err) => {
-        console.error("Could not copy text: ", err);
-      }
-    );
-  };
+  // Combine all inputs into one string with a newline separator
+  const combinedInputs = question.examples.inputs.join("\\n");
+
+  // Combine all outputs into one string with a newline separator
+  const combinedOutputs = question.examples.outputs.join("\\n");
 
   return (
     <>
       <div className="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-end">
-          {/* Page content here */}
           <label
             htmlFor="my-drawer-4"
             className="drawer-button btn btn-primary m-4"
@@ -39,7 +72,6 @@ function Question() {
             className="drawer-overlay"
           ></label>
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {/* Sidebar content here */}
             <div className="container">
               <h3 className="font-bold mb-2">
                 {id} | {question.title}
@@ -59,26 +91,12 @@ function Question() {
                 <hr />
 
                 <p className="text-sm text-zinc-500 mt-3">Examples:</p>
-                <ul className="mb-4">
-                  {question.examples.map((example, index) => (
-                    <li key={index} className="text-sm text-zinc-500 mt-2">
-                      <div className="bg-zinc-100 p-2 rounded">
-                        <p className="font-bold">Input:</p>
-                        <p
-                          className="text-black cursor-pointer select-all"
-                          onClick={() => handleCopy(example.input)}
-                        >
-                          {example.input}
-                        </p>
-                      </div>
 
-                      <div className="bg-zinc-100 p-2 rounded mt-2">
-                        <p className="font-bold">Output:</p>
-                        <p className="text-black">{example.output}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                {/* Render all inputs in one CopyableBox */}
+                <CopyableBox content={combinedInputs} label="All Inputs" />
+
+                {/* Render all outputs in one CopyableBox */}
+                <CopyableBox content={combinedOutputs} label="All Outputs" />
 
                 <hr />
                 <div className="text-sm text-zinc-500 mt-3">

@@ -99,3 +99,13 @@ exports.logIn=async (req,res)=>{
         res.status(500).json({message:"Internal Server Error"})
     }
 }
+
+exports.logout=async(req,res,next)=>{
+    try {
+        res.clearCookie("uid");
+        res.status(200).json({message:"Logout successfully"});
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}

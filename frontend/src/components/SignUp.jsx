@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthProvider";
 
 function SignIn() {
   const navigate = useNavigate();
-  const [_, setAuthUser] = useAuth();
+  const [authUser, setAuthUser] = useAuth();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -34,10 +34,12 @@ function SignIn() {
       if (err.response) {
         setTimeout(() => {
           toast.error(err.response.data.message);
-        }, 3000);
+        }, 1000);
       }
     }
   };
+
+  
 
   return (
     <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">

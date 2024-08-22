@@ -1,26 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthProvider";
 
 function LogIn() {
+  const [authUser, setAuthUser]= useAuth();
+  const navigate = useNavigate(); // Add navigate for redirection
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
-  const onSubmit = (data) => console.log(data)
+  } = useForm();
 
+  const onSubmit = async (data) =>{
+    const user = {
+      email: data.email,
+      password: data.password,
+    };
+    
+    await axios.post('/api/user/login', user)
+    .then((res) => {
+      if (res.data) {
+        setAuthUser(res.data.user);
+        localStorage.setItem("uid", JSON.stringify(res.data.user));
+        toast.success(`Welcome to CodeEdu ${res.data.user.name}`);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    })
+    .catch((err) => {
+      if (err.response) {
+        setTimeout(() => {
+          toast.error(err.response.data.message);
+        }, 1000);
+      }
+    });
+    }
 
+    
   return (
     <dialog id="my_modal_3" className="modal">
       <div className="modal-box">
-        <form method="dialog">
-          {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-ghost absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500">
-            ✕
-          </button>
-        </form>
+        <button
+          className="btn btn-sm btn-ghost absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500"
+          type="button" // Add type attribute to prevent form submission
+          onClick={() => document.getElementById('my_modal_3').close()} // Ensure it closes the modal
+        >
+          ✕
+        </button>
         <h3 className="font-bold text-lg">Login</h3>
         <div className="card min-w-screen w-full bg-base-100">
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
@@ -32,7 +63,6 @@ function LogIn() {
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
-                name="email"
                 {...register("email", { required: true })}
               />
               {errors.email && <span className="text-red-500">This field is required</span>}
@@ -42,10 +72,9 @@ function LogIn() {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
-                name="password"
                 {...register("password", { required: true })}
               />
               {errors.password && <span className="text-red-500">This field is required</span>}
@@ -57,10 +86,7 @@ function LogIn() {
               <span className="mt-4">
                 Not registered?
                 <Link to="/signup">
-                  <span className="cursor-pointer text-violet-600">
-                    {" "}
-                    SignUp!
-                  </span>
+                  <span className="cursor-pointer text-violet-600"> SignUp!</span>
                 </Link>
               </span>
             </div>

@@ -3,18 +3,13 @@
     "id": 1,
     "title": "Binary Tree from Inorder and Postorder",
     "difficulty": "Medium",
-    "descriptions": "Given inorder and postorder traversals of a binary tree(having n nodes) in the arrays in[] and post[] respectively. The task is to construct a unique binary tree from these traversals. Driver code will print the preorder traversal of the constructed tree. Note:- The inorder and postorder traversals contain unique values, and every value present in the postorder traversal is also found in the inorder traversal.",
+    "descriptions": "Given inorder and postorder traversals of a binary tree (having n nodes) in the arrays in[] and post[] respectively. The task is to construct a unique binary tree from these traversals. Driver code will print the preorder traversal of the constructed tree. Note:- The inorder and postorder traversals contain unique values, and every value present in the postorder traversal is also found in the inorder traversal.",
     "testCases": 2,
-    "examples": [
-      {
-        "input": "n = 8, in[] = [4, 8, 2, 5, 1, 6, 3, 7], post[] = [8, 4, 5, 2, 6, 7, 3, 1]",
-        "output": "1 2 4 8 5 3 6 7"
-      },
-      {
-        "input": "n = 5, in[] = [9, 5, 2, 3, 4], post[] = [5, 9, 3, 4, 2]",
-        "output": "2 9 5 4 3"
-      }
-    ],
+    "examples": {
+        "inputs":["2","8\\n4 8 2 5 1 6 3 7\\n8 4 5 2 6 7 3 1","5\\n9 5 2 3 4\\n5 9 3 4 2"],
+        "outputs":["1 2 4 8 5 3 6 7","2 9 5 4 3"]
+      
+    },
     "time": "O(n)",
     "space": "O(n)"
   },

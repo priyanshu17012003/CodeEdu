@@ -1,7 +1,12 @@
 import React from "react";
-import LogIn from "./LogIn"; 
+import LogIn from "./LogIn";
+import { useAuth } from "../context/AuthProvider";
+import Logout from "./Logout";
 
 function Navbar() {
+
+  const [authUser, setAuthUser] = useAuth();
+
   return (
     <>
       <div className="navbar bg-neutral-900 max-w-screen-2xl container px-5 bg md:px-5">
@@ -50,7 +55,9 @@ function Navbar() {
               </li>
             </ul>
           </div>
-          <a className="btn mx-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white" onClick={()=>document.getElementById("my_modal_3").showModal()}>Login</a>
+          {
+            authUser? <Logout></Logout>:<a className="btn mx-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white" onClick={()=>document.getElementById("my_modal_3").showModal()}>Login</a>
+          }
           <LogIn></LogIn>
         </div>
       </div>
