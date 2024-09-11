@@ -6,11 +6,15 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
-function SignIn() {
+function CreateProfile() {
   const navigate = useNavigate();
   const [authUser, setAuthUser] = useAuth();
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = async (data) => {
     const user = {
@@ -27,7 +31,7 @@ function SignIn() {
         toast.success(`Welcome to CodeEdu ${res.data.user.name}`);
 
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/");
         }, 3000);
       }
     } catch (err) {
@@ -38,8 +42,6 @@ function SignIn() {
       }
     }
   };
-
-  
 
   return (
     <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">
@@ -63,14 +65,10 @@ function SignIn() {
 
         <div className="card bg-base-100 shrink-0 shadow-2xl w-full max-w-sm p-4">
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-            <Link
-              to="/"
-              className="btn btn-sm absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500"
-            >
-              ✕
-            </Link>
             <div className="form-control">
-              <h2 className="text-2xl font-bold mb-4 text-violet-600">SignUp</h2>
+              <h2 className="text-2xl font-bold mb-4 text-violet-600">
+                SignUp
+              </h2>
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
@@ -81,7 +79,9 @@ function SignIn() {
                 name="name"
                 {...register("name", { required: true })}
               />
-              {errors.name && <span className="text-red-500">This field is required</span>}
+              {errors.name && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -94,20 +94,22 @@ function SignIn() {
                 name="email"
                 {...register("email", { required: true })}
               />
-              {errors.email && <span className="text-red-500">This field is required</span>}
+              {errors.email && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text">Pronoun</span>
               </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                name="password"
-                {...register("password", { required: true })}
-              />
-              {errors.password && <span className="text-red-500">This field is required</span>}
+              <select {...register("pronoun")}>
+                <option value="male">He/Him</option>
+                <option value="female">She/Her</option>
+                <option value="other">Other</option>
+              </select>
+              {errors.pronoun && (
+                <span className="text-red-500">This field is required</span>
+              )}
             </div>
             <div className="card-actions flex justify-between mt-6">
               <button className="btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white">
@@ -127,4 +129,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default CreateProfile;

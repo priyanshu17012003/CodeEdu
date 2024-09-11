@@ -4,6 +4,7 @@ const dotenv=require('dotenv');
 const cors=require('cors');
 const cookieParser = require('cookie-parser');
 const userRouter=require('./routes/user-routes');
+const profileRouter=require('./routes/profile-routes');
 dotenv.config();
 const app=express();
 
@@ -27,6 +28,7 @@ catch(error){
 }
 
 app.use('/api/user',userRouter);
+app.use('/api/profile',profileRouter);
 
 app.listen(port,()=>{
     console.log("server is running on port "+port);
