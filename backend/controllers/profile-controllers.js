@@ -4,19 +4,14 @@ const User=require('../models/user-model');
 exports.createProfile=async(req,res)=>{
 
     try{
-        const {name,email,college,linkdin,skills,bio}=req.body;
+        const {name,email,college,pronoun,linkdin,skills,bio}=req.body;
         const userExists=await User.findOne({email});
-
-        if(!userExists){
-            return res.status(200).json({
-                message:"First SignUp Us!"
-            })
-        }
 
         const user=await Profile.create({
             loginId:userExists._id,
             name:name,
             email:email,
+            pronoun:pronoun,
             college:college,
             linkdin:linkdin,
             skills:skills,
@@ -41,12 +36,21 @@ exports.getProfile=async(req,res)=>{
 
     const user=await Profile.findOne({loginId:userId});
     
-    res.status(200).json(
-        {
-            message:"profile fetched successfully",
-            user
-        }
-    )
+    
+        res.status(200).json(
+            {
+                message:"profile fetched successfully",
+                user:{
+                    name:user.name,
+                    email:user.email,
+                    college:user.college,
+                    pronoun:user.pronoun,
+                    linkdin:user.linkdin,
+                    skills:user.skills,
+                    bio:user.bio
+                }
+            }
+        )
     }
     catch (error)
     {

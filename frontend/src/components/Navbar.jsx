@@ -1,6 +1,7 @@
 import React from "react";
 import LogIn from "./LogIn";
 import { useAuth } from "../context/AuthProvider";
+import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 function Navbar() {
@@ -33,7 +34,7 @@ function Navbar() {
               className="menu menu-sm dropdown-content bg-neutral-900 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="text-violet-600">Item 1</a>
+                <Link to={"/showProfile"} className="text-violet-600">Profile</Link>
               </li>
               <li>
                 <a className="text-violet-600">Item 3</a>
@@ -48,7 +49,7 @@ function Navbar() {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <li>
-                <a className="text-violet-600">Item 1</a>
+                <Link to={"/showProfile"} className="text-violet-600">Profile</Link>
               </li>
               <li>
                 <a className="text-violet-600">Item 2</a>

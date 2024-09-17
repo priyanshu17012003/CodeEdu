@@ -1,47 +1,38 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
 
-function CreateProfile() {
-  const navigate = useNavigate();
-  
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+function ShowProfile() {
+  const [authUser] = useAuth();
+  const [profile, setProfile] = useState({});
 
-  const onSubmit = async (data) => {
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+        if (authUser) {
+          await axios
+            .get(`/api/profile/showProfile/${authUser.id}`)
+            .then((res) => {
 
-    const skillsArray = data.skills.split(" ").filter(skill => skill);
+              setProfile({
+                name: res.data.user.name,
+                email: res.data.user.email,
+                college: res.data.user.college,
+                pronoun: res.data.user.pronoun,
+                linkdin: res.data.user.linkdin,
+                skills: res.data.user.skills,
+                bio: res.data.user.bio,
+              });
 
-    const user = {
-      name: data.name,
-      email: data.email,
-      pronoun: data.pronoun,
-      college: data.college,
-      linkdin: data.linkdin,
-      skills: skillsArray,
-      bio: data.bio,
+            });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-
-    try {
-      const res = await axios.post("/api/profile/CreateProfile", user);
-      if (res.data) {
-        setTimeout(() => {
-          toast.success("Profile created successfully");
-          navigate("/");
-        }, 3000);
-      }
-    } catch (err) {
-      if (err.response) {
-        console.log(err.response.data.message);
-      }
-    }
-  };
+    getProfile();
+  }, [authUser]);
 
   return (
     <div className="hero bg-gradient-to-b from-[#1d1d1d] via-[#1d1d1d] to-[#041c31] flex flex-col min-h-screen justify-center items-center md:flex-row-reverse">
@@ -59,7 +50,7 @@ function CreateProfile() {
         </div>
 
         <div className="card bg-base-100 shrink-0 shadow-2xl w-full max-w-screen-md p-4">
-          <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+          <div className="card-body">
             <div className="form-control">
               <h2 className="text-2xl font-bold mb-4 text-violet-600">
                 Profile
@@ -72,11 +63,9 @@ function CreateProfile() {
                 placeholder="name"
                 className="input input-bordered"
                 name="name"
-                {...register("name", { required: true })}
+                value={profile.name}
+                readOnly
               />
-              {errors.name && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -87,28 +76,22 @@ function CreateProfile() {
                 placeholder="email"
                 className="input input-bordered"
                 name="email"
-                {...register("email", { required: true })}
+                value={profile.email}
+                readOnly
               />
-              {errors.email && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Pronoun</span>
               </label>
-              <select 
-              type="text"
-              name="pronoun" 
-              className="input input-bordered" 
-              {...register("pronoun", { required: true })}>
-                <option value="He/Him">He/Him</option>
-                <option value="She/Her">She/Her</option>
-                <option value="Other">Other</option>
-              </select>
-              {errors.pronoun && (
-                <span className="text-red-500">This field is required</span>
-              )}
+              <input
+                type="email"
+                placeholder="email"
+                className="input input-bordered"
+                name="pronoun"
+                value={profile.pronoun}
+                readOnly
+              />
             </div>
             <div className="form-control">
               <label className="label">
@@ -119,11 +102,9 @@ function CreateProfile() {
                 placeholder="college name"
                 className="input input-bordered"
                 name="college"
-                {...register("college", { required: true })}
+                value={profile.college}
+                readOnly
               />
-              {errors.college && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -134,11 +115,9 @@ function CreateProfile() {
                 placeholder="url"
                 className="input input-bordered"
                 name="linkdin"
-                {...register("linkdin", { required: true })}
+                value={profile.linkdin}
+                readOnly
               />
-              {errors.linkdin && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -149,11 +128,9 @@ function CreateProfile() {
                 placeholder="leave space between skills"
                 className="input input-bordered"
                 name="skills"
-                {...register("skills", { required: true })}
+                value={profile.skills}
+                readOnly
               />
-              {errors.skills && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
             <div className="form-control">
               <label className="label">
@@ -164,22 +141,15 @@ function CreateProfile() {
                 placeholder="Bio"
                 className="input input-bordered"
                 name="bio"
-                {...register("bio", { required: true })}
+                value={profile.bio}
+                readOnly
               />
-              {errors.bio && (
-                <span className="text-red-500">This field is required</span>
-              )}
             </div>
-            <div className="card-actions flex justify-between mt-6">
-              <button className="btn bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white">
-                Submit
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-export default CreateProfile;
+export default ShowProfile;

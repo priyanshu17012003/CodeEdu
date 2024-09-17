@@ -7,32 +7,32 @@ const profileSchema=new mongoose.Schema({
     },
     name:{
         type:String,
-        require:true
+        required:true
     },
     email:{
         type:String,
-        require:true,
+        required:true,
         unique:true
     },
     pronoun:{
         type:String,
-        require:true
+        required:true
     },
     college:{
         type:String,
-        require:true
+        required:true
     },
     linkdin:{
         type:String,
-        require:true
+        required:true
     },
     skills:{
-        type:String,
-        require:true
+        type:[String],
+        required:true
     },
     bio:{
         type:String,
-        require:true
+        required:true
     }
 
 })
