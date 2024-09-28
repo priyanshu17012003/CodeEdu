@@ -35,7 +35,7 @@ function Testimonials() {
   return (
     <>
       <div className="bg-[#1d1d1d] p-10">
-        <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500 mb-4">
+        <h1 className="text-6xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500 mb-4 ">
           Testimonials
         </h1>
         <p className="text-center text-xl text-gray-300 mb-6">
