@@ -26,12 +26,20 @@ const profileSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    github:{
+        type:String,
+        required:true
+    },
     skills:{
         type:[String],
         required:true
     },
     bio:{
         type:String,
+        required:true
+    },
+    languages:{
+        type:[String],
         required:true
     }
 

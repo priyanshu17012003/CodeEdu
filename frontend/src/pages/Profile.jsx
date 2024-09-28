@@ -1,10 +1,12 @@
 import React from 'react'
-import CreateProfile from '../components/CreateProfile'
+import ShowProfile from '../components/ShowProfile'
+import Navbar from '../components/Navbar'
 
 function Profile() {
   return (
     <>
-    <CreateProfile></CreateProfile>
+    <Navbar></Navbar>
+    <ShowProfile></ShowProfile>
     </>
   )
 }

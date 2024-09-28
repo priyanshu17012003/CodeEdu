@@ -6,7 +6,7 @@ import Question from './components/Question';
 import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router-dom';
 import Profile from './pages/Profile';
-import ShowProfile from './components/ShowProfile';
+import CreateProfile from './components/CreateProfile';
 import { useAuth } from './context/AuthProvider';
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
   <>
   <Routes>
   <Route path="/" element={<Home />} />
-  <Route path="/signup" element={<SignUp />} />
+  <Route path="/signup" element={<SignUp/>} />
   <Route path="/list" element={<List />} />
   <Route path="/question/:id" element={<Question />} />
-  <Route path="/profile" element={authUser?<Profile/>:<SignUp/>}/>
-  <Route path="/showProfile" element={authUser?<ShowProfile/>:<Home/>}/>
+  <Route path="/profile" element={authUser?<CreateProfile/>:<SignUp/>}/>
+  <Route path="/showProfile" element={authUser?<Profile/>:<Home/>}/>
   </Routes>
   <Toaster />
   </>

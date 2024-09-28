@@ -12,16 +12,12 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-const url=process.env.url||"mongodb://localhost:27017/CodeEdu";
+const url=process.env.url;
 const port=process.env.port||5000;
 
 try{
-    mongoose.connect(url,{
-        useNewUrlParser:true,
-        useUnifiedTopology:true
-    });
-
-    console.log("database connected successfully");
+    mongoose.connect(url);
+    console.log("Connected to mongodb");
 }
 catch(error){
     console.log(error);

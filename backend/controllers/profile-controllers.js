@@ -4,7 +4,7 @@ const User=require('../models/user-model');
 exports.createProfile=async(req,res)=>{
 
     try{
-        const {name,email,college,pronoun,linkdin,skills,bio}=req.body;
+        const {name,email,college,pronoun,linkdin,github,skills,bio,languages}=req.body;
         const userExists=await User.findOne({email});
 
         const user=await Profile.create({
@@ -14,8 +14,10 @@ exports.createProfile=async(req,res)=>{
             pronoun:pronoun,
             college:college,
             linkdin:linkdin,
+            github:github,
             skills:skills,
             bio:bio,
+            languages:languages
         })
 
         res.status(200).json({
@@ -46,8 +48,10 @@ exports.getProfile=async(req,res)=>{
                     college:user.college,
                     pronoun:user.pronoun,
                     linkdin:user.linkdin,
+                    github:user.github,
                     skills:user.skills,
-                    bio:user.bio
+                    bio:user.bio,
+                    languages:user.languages
                 }
             }
         )

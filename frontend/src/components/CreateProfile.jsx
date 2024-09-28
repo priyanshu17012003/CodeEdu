@@ -16,6 +16,7 @@ function CreateProfile() {
   const onSubmit = async (data) => {
 
     const skillsArray = data.skills.split(" ").filter(skill => skill);
+    const languagesArray = data.languages.split(" ").filter(language => language);
 
     const user = {
       name: data.name,
@@ -23,6 +24,8 @@ function CreateProfile() {
       pronoun: data.pronoun,
       college: data.college,
       linkdin: data.linkdin,
+      github: data.github,
+      languages: languagesArray,
       skills: skillsArray,
       bio: data.bio,
     };
@@ -142,6 +145,21 @@ function CreateProfile() {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Github</span>
+              </label>
+              <input
+                type="text"
+                placeholder="url"
+                className="input input-bordered"
+                name="github"
+                {...register("github", { required: true })}
+              />
+              {errors.github && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Skills</span>
               </label>
               <input
@@ -152,6 +170,21 @@ function CreateProfile() {
                 {...register("skills", { required: true })}
               />
               {errors.skills && (
+                <span className="text-red-500">This field is required</span>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Languages</span>
+              </label>
+              <input
+                type="text"
+                placeholder="leave space between skills"
+                className="input input-bordered"
+                name="languages"
+                {...register("languages", { required: true })}
+              />
+              {errors.languages && (
                 <span className="text-red-500">This field is required</span>
               )}
             </div>

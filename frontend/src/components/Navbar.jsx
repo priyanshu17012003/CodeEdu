@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 function Navbar() {
-
   const [authUser, setAuthUser] = useAuth();
 
   return (
@@ -33,9 +32,13 @@ function Navbar() {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-neutral-900 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <Link to={"/showProfile"} className="text-violet-600">Profile</Link>
-              </li>
+              {authUser ? (
+                <li>
+                  <Link to={"/showProfile"} className="text-violet-600">
+                    Profile
+                  </Link>
+                </li>
+              ) : null}
               <li>
                 <a className="text-violet-600">Item 3</a>
               </li>
@@ -48,17 +51,28 @@ function Navbar() {
         <div className="navbar-end">
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
-              <li>
-                <Link to={"/showProfile"} className="text-violet-600">Profile</Link>
-              </li>
+              {authUser ? (
+                <li>
+                  <Link to={"/showProfile"} className="text-violet-600">
+                    Profile
+                  </Link>
+                </li>
+              ) : null}
               <li>
                 <a className="text-violet-600">Item 2</a>
               </li>
             </ul>
           </div>
-          {
-            authUser? <Logout></Logout>:<a className="btn mx-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white" onClick={()=>document.getElementById("my_modal_3").showModal()}>Login</a>
-          }
+          {authUser ? (
+            <Logout></Logout>
+          ) : (
+            <a
+              className="btn mx-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 hover:text-white"
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+            >
+              Login
+            </a>
+          )}
           <LogIn></LogIn>
         </div>
       </div>

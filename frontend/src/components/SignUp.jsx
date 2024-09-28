@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 
-function SignIn() {
+function SignUp() {
   const navigate = useNavigate();
   const [authUser, setAuthUser] = useAuth();
 
@@ -127,4 +127,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

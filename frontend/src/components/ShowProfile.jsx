@@ -22,6 +22,8 @@ function ShowProfile() {
                 linkdin: res.data.user.linkdin,
                 skills: res.data.user.skills,
                 bio: res.data.user.bio,
+                languages: res.data.user.languages,
+                github: res.data.user.github,
               });
 
             });
@@ -121,6 +123,19 @@ function ShowProfile() {
             </div>
             <div className="form-control">
               <label className="label">
+                <span className="label-text">Github</span>
+              </label>
+              <input
+                type="text"
+                placeholder="url"
+                className="input input-bordered"
+                name="github"
+                value={profile.github}
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text">Skills</span>
               </label>
               <input
@@ -129,6 +144,19 @@ function ShowProfile() {
                 className="input input-bordered"
                 name="skills"
                 value={profile.skills}
+                readOnly
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Languages</span>
+              </label>
+              <input
+                type="text"
+                placeholder="leave space between skills"
+                className="input input-bordered"
+                name="skills"
+                value={profile.languages}
                 readOnly
               />
             </div>
