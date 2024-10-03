@@ -8,7 +8,7 @@
     "id":2,
     "name":"John Doe",
     "text":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero facilis minus libero perspiciatis, cumque molestiae.",
-    "bgColor": "bg-blue-500"
+    "bgColor": "bg-primary"
 },
 {
     "id":3,
@@ -20,7 +20,7 @@
     "id":4,
     "name":"Bob Smith",
     "text":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero facilis minus libero perspiciatis, cumque molestiae.",
-    "bgColor": "bg-blue-500"
+    "bgColor": "bg-primary"
 },
 {
     "id":5,
@@ -32,6 +32,6 @@
     "id":6,
     "name":"Tom Wilson",
     "text":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero facilis minus libero perspiciatis, cumque molestiae.",
-    "bgColor": "bg-blue-500"
+    "bgColor": "bg-primary"
 }
 ]
