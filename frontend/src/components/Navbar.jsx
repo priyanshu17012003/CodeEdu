@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-neutral-900 max-w-screen-2xl container px-5 bg md:px-5">
+      <div className="navbar bg-neutral-900 container px-5 bg md:px-5">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
