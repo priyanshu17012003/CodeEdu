@@ -1,0 +1,26 @@
+.new-home-container {
+    display: flex;
+    height: 100vh; 
+  
+    .left-section {
+      flex: 1; 
+      display: flex;
+      flex-direction: column; 
+      padding: 20px; 
+      background-color: #171717; 
+      border-right: 1px solid #ccc; 
+    }
+  
+    .right-section {
+      flex: 1; 
+      padding: 20px; 
+      background-color: #fff; 
+      overflow-y: auto; 
+    }
+  
+    .rules-container {
+      max-height: 100%; 
+      overflow-y: auto; 
+    }
+  }
+  
