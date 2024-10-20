@@ -1,8 +1,9 @@
 import React from 'react';
 
 function Rules() {
+
   return (
-    <div className="rules-container"> {/* Add a class for styling */}
+    <div className="rules-container min-h-screen w-full min-w-screen">
       <h2 style={{color: '#8e14f6',padding: '0.4rem'}}>Rules for Candidate</h2>
       <p style={{color: 'black',padding: '1rem', margin: '0.1rem', lineHeight: '2'}}>
         1. The candidate will be provided with an ID through their registered email. The ID will be used to connect to the host.<br />

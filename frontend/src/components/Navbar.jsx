@@ -47,7 +47,7 @@ function Navbar() {
                 </>
               ) : null}
               <li>
-                <a className="text-violet-600">Item 3</a>
+                <Link to={"/"} className="text-violet-600">Home</Link>
               </li>
             </ul>
           </div>
@@ -73,7 +73,7 @@ function Navbar() {
                 </>
               ) : null}
               <li>
-                <a className="text-violet-600">Item 2</a>
+                <Link to={"/"} className="text-violet-600">Home</Link>
               </li>
             </ul>
           </div>

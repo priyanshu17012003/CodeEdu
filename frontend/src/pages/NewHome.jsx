@@ -9,8 +9,7 @@ function NewHome() {
   return (
     <>
     <Navbar></Navbar>
-    <div className="new-home-container">
-      
+    <div className="new-home-container min-h-screen min-w-screen">
       <div className="left-section">
         <JoinRoom />
         <br></br>
