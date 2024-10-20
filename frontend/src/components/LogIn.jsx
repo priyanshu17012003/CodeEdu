@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthProvider";
 
 function LogIn() {
   const [authUser, setAuthUser]= useAuth();
-  const navigate = useNavigate(); // Add navigate for redirection
+  const navigate = useNavigate(); 
 
   const {
     register,
@@ -46,9 +46,9 @@ function LogIn() {
     <dialog id="my_modal_3" className="modal">
       <div className="modal-box">
         <button
-          className="btn btn-sm btn-ghost absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500"
-          type="button" // Add type attribute to prevent form submission
-          onClick={() => document.getElementById('my_modal_3').close()} // Ensure it closes the modal
+          className="btn btn-sm btn-ghost absolute right-2 top-2 bg-transparent bg-clip-border bg-gradient-to-r from-cyan-300 to-violet-500 z-10"
+          type="button" 
+          onClick={() => document.getElementById('my_modal_3').close()}
         >
           ✕
         </button>
