@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import "./index.scss";
 import EditorPageConnector from "./EditorPageConnector"; 
 import { useCallback, useState, useEffect } from "react";
 import { createSubmission } from "./judge";
+import Logo from '../assets/logo.png';
 
 const PlaygroundConnector = () => {
   const { roomId } = useParams(); 
@@ -61,9 +61,9 @@ const PlaygroundConnector = () => {
   
   return (
     <div className="playground-container">
-      <div className="container-header">
-        <img src="/logo.png" alt="logo" />
-        <b>Code Online</b>
+      <div className="container-header bg-slate-950">
+        <img src={Logo} alt="Logo"></img>
+        <b className="text-lg text-white p-3">Compiler</b>
       </div>
       <div className="container-body">
         <div className="editor">
@@ -77,7 +77,7 @@ const PlaygroundConnector = () => {
 
         <div className="input">
           <div className="input-header">
-            <b>Input:</b>
+            <h2 className="text-xl font-bold">Input:</h2>
             <label htmlFor="uploadTestcase" className="label-upload">
               <span className="material-icons icons">upload</span>
               <span className="title">Import Code</span>
@@ -97,7 +97,7 @@ const PlaygroundConnector = () => {
 
         <div className="output">
           <div className="input-header">
-            <b>Output:</b>
+            <h2 className="text-xl font-bold">Output:</h2>
             <button className="label">
               <span className="material-icons icons">download</span>
               <span className="title">Export Code</span>

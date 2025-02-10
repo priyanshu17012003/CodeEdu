@@ -11,8 +11,8 @@ function Card({ item }) {
           </div>
         </div>
       </div>
-      <div className="card-body p-4">
-        <h2 className="card-title text-lg sm:text-xl md:text-lg lg:text-xl font-semibold text-center">{item.name}</h2>
+      <div className="card-body p-2">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center">{item.name}</h2>
         <p className="text-gray-200 mb-4 text-center text-sm md:text-base">{item.text}</p>
       </div>
     </div>

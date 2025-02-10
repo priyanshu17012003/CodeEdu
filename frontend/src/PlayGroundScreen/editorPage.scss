@@ -5,7 +5,6 @@
 
   .editor-header,
   .editor-footer {
-    background-color: white;
     color: black;
     flex-shrink: 0;
   }
@@ -13,7 +12,7 @@
   .editor-footer {
     display: flex;
     justify-content: space-around;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color:  #171717; 
     position: sticky; 
     bottom: 0;

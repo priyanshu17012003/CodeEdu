@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-neutral-900 container px-5 bg md:px-5">
+      <div className="navbar bg-neutral-900 px-5 bg md:px-5 w-full">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,14 +46,9 @@ function Navbar() {
                 </li>
                 </>
               ) : null}
-              <li>
-                <Link to={"/"} className="text-violet-600">Home</Link>
-              </li>
             </ul>
           </div>
-          <p className="btn btn-ghost text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500 p-0">
-            CodeEDU
-          </p>
+          <Link to={"/"} className="btn btn-ghost text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-violet-500 p-0">CodeEdu</Link>
         </div>
         <div className="navbar-end">
           <div className="navbar-center hidden lg:flex">
@@ -72,9 +67,6 @@ function Navbar() {
                 </li>
                 </>
               ) : null}
-              <li>
-                <Link to={"/"} className="text-violet-600">Home</Link>
-              </li>
             </ul>
           </div>
           {authUser ? (

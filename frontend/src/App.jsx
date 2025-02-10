@@ -12,6 +12,8 @@ import { useContext } from 'react';
 import {SocketContext} from './Provider/SocketProvider'
 import NewHome from './pages/NewHome';
 import PlaygroundConnector from './PlayGroundScreen/PlaygroundConnector'
+import Newhome from '../src/screen/HomeScreen/index.jsx'
+import Playground from '../src/screen/PlayGroundScreen/index.jsx'
 
 function App() {
   
@@ -20,6 +22,8 @@ function App() {
   return(
   <>
   <Routes>
+  <Route path='/newhome' element={<Newhome/>} />
+  <Route path='newhome/playground/:fileId/:folderId/:fileName' element={<Playground/>} />
   <Route path="/" element={<Home />} />
   <Route path="/signup" element={<SignUp/>} />
   <Route path="/list" element={<List />} />

@@ -58,7 +58,7 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   const handleLanguageChange = (event) => {
     const newLanguage = event.target.value;
     setLanguage(newLanguage);
-    updateLanguage(newLanguage); 
+    updateLanguage(newLanguage);
   };
 
   const handleRunCode = () => {
@@ -93,7 +93,7 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
             setIsWarned(1);
           } else if (isWarned === 1) {
             alert("Session terminated.");
-            navigate("/newHome"); 
+            navigate("/"); 
           }
         }
       };
@@ -109,16 +109,17 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
   return (
     <div className="editor-container">
       <div className="editor-header">
-        <h2>Editor</h2>
-        <select value={language} onChange={handleLanguageChange}>
-          <option value="javascript">JavaScript</option>
-          <option value="python">Python</option>
-          <option value="java">Java</option>
-          <option value="c">C</option>
-          <option value="cpp">C++</option>
-        </select>
-        <button onClick={handleSave}>Save Code</button>
-        <button onClick={handleExportClick}>Export Code</button>
+          <div>
+            <select className="dropdown" value={language} onChange={handleLanguageChange}>
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="java">Java</option>
+              <option value="c">C</option>
+              <option value="cpp">C++</option>
+            </select>
+          </div>
+          <button onClick={handleSave}>Save Code</button>
+          <button onClick={handleExportClick}>Export Code</button>
       </div>
       <div className="editor-body">
         <Editor
@@ -130,12 +131,8 @@ const EditorPageConnector = ({ roomId, submitCode, saveCode, handleExport }) => 
           onChange={handleEditorChange}
         />
       </div>
-      {role === "client" && (
-        <div className="editor-footer" style={{ margin: 0 }}>
-          <button onClick={enterFullScreen}>Enter Fullscreen</button>
-        </div>
-      )}
-      <div className="editor-footer" style={{margin:0}}>
+      <div className="editor-footer">
+        {role === "client" && <button onClick={enterFullScreen}>Enter Fullscreen</button>}
         <button onClick={handleRunCode}>Run Code</button>
       </div>
     </div>
